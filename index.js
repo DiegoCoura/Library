@@ -1,15 +1,9 @@
+const myLibrary = [];
+
 const openDialogBtn = document.querySelector(".open-dialog-btn");
 const cancelBtn = document.getElementById("cancel");
 const dialog = document.getElementById("add-book-dialog");
 const addForm = document.getElementById("add-form");
-
-function openCheck(dialog) {
-  if (dialog.open) {
-    console.log("dialog open");
-  } else {
-    console.log("dialog closed");
-  }
-}
 
 addForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -29,26 +23,20 @@ addForm.addEventListener("submit", (e) => {
       isRead.checked
     );
     myLibrary.push(newBook);
-    fieldsReset(bookTitle,
-        bookAuthor,
-        numOfPages,
-        isRead)
+    fieldsReset(bookTitle, bookAuthor, numOfPages, isRead);
   }
   addForm.submit();
   console.log(myLibrary);
+  displayCards(myLibrary);
 });
 
 openDialogBtn.addEventListener("click", () => {
   dialog.showModal();
-  openCheck(dialog);
 });
 
 cancelBtn.addEventListener("click", () => {
-  dialog.close("aborted");
-  openCheck(dialog);
+  dialog.close();
 });
-
-const myLibrary = [];
 
 function Book(title, author, numOfPages, read) {
   (this.title = title),
@@ -70,5 +58,37 @@ function fieldsReset(bookTitle, bookAuthor, numOfPages, isRead) {
   isRead.checked = false;
 }
 
-const randomBook = new Book("Harry Potter", "J. K. Rowling", "200", false);
-const aVolta = new Book("A volta", "Jose Saramago", "300", true);
+function displayCards(myLibrary) {
+  let cardContainer = document.querySelector(".hero");
+
+  myLibrary.forEach((book) => {
+    let newCard = document.createElement("div");
+    newCard.classList.add("card");
+    let newTitle = document.createElement("h3");
+    newTitle.innerText = book.title;
+    let newAuthor = document.createElement("h4");
+    newAuthor.innerText = book.author;
+    let newPages = document.createElement("h4");
+    newPages.innerText = book.numOfPages;
+    let newIsRead = document.createElement("input");
+    newIsRead.type = "checkbox";
+    newIsRead.name = "addedRead"
+    newIsRead.checked = book.read;
+    
+
+    newCard.appendChild(newTitle);
+    newCard.appendChild(newAuthor);
+    newCard.appendChild(newPages);
+    newCard.appendChild(newIsRead);
+    
+    cardContainer.appendChild(newCard);
+  });
+
+  // <card>
+  //     <h3>"{book.title}"</h3>
+  //     <h4>{book.author}</h4>
+  //     <h4>{book.numOfPages} pages</h4>
+  //     <label htmlFor="added-is-read"></label>
+  //     <input type="checkbox" name="addedRead" id="added-is-read" value={book.isRead} />
+  // </card>
+}
