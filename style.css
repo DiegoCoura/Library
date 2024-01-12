@@ -13,7 +13,7 @@ body {
   font-weight: 500;
 }
 
-nav {
+.header-nav {
   display: flex;
   background-color: blue;
   justify-content: space-between;
@@ -22,7 +22,7 @@ nav {
   color: #fff;
 }
 
-nav button {
+.open-dialog-btn {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -110,6 +110,6 @@ nav button {
   background-color: aqua;
 }
 
-footer {
+.footer {
   background-color: black;
 }

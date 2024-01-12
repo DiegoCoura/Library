@@ -83,12 +83,4 @@ function displayCards(myLibrary) {
     
     cardContainer.appendChild(newCard);
   });
-
-  // <card>
-  //     <h3>"{book.title}"</h3>
-  //     <h4>{book.author}</h4>
-  //     <h4>{book.numOfPages} pages</h4>
-  //     <label htmlFor="added-is-read"></label>
-  //     <input type="checkbox" name="addedRead" id="added-is-read" value={book.isRead} />
-  // </card>
 }
