@@ -59,8 +59,15 @@ function fieldsReset(bookTitle, bookAuthor, numOfPages, isRead) {
   isRead.checked = false;
 }
 
+function removeAllChildNodes(parent){
+  while(parent.firstChild){
+    parent.removeChild(parent.firstChild);
+  }
+}
+
 function displayCards(myLibrary) {
   let cardContainer = document.querySelector(".hero");
+  removeAllChildNodes(cardContainer);
 
   myLibrary.forEach((book) => {
     let newCard = document.createElement("div");
