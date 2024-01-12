@@ -1,17 +1,18 @@
 const myLibrary = [];
 
-const openDialogBtn = document.querySelector(".open-dialog-btn");
-const cancelBtn = document.getElementById("cancel");
-const dialog = document.getElementById("add-book-dialog");
 const addForm = document.getElementById("add-form");
+
+const openDialogBtn = document.querySelector(".open-dialog-btn");
+const cancelBtn = document.querySelector(".cancel-btn");
+const dialog = document.querySelector(".add-book-dialog");
 
 addForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  let bookTitle = document.getElementById("title");
-  let bookAuthor = document.getElementById("author");
-  let numOfPages = document.getElementById("num-of-pages");
-  let isRead = document.getElementById("is-read");
+  let bookTitle = document.querySelector(".title");
+  let bookAuthor = document.querySelector(".author");
+  let numOfPages = document.querySelector(".num-of-pages");
+  let isRead = document.querySelector(".is-read");
 
   if (bookTitle.value === "") {
     return;
@@ -65,22 +66,32 @@ function displayCards(myLibrary) {
     let newCard = document.createElement("div");
     newCard.classList.add("card");
     let newTitle = document.createElement("h3");
-    newTitle.innerText = book.title;
+    newTitle.innerText = `Title: "${book.title}"`;
     let newAuthor = document.createElement("h4");
-    newAuthor.innerText = book.author;
+    newAuthor.innerText = `Author: ${book.author}`;
     let newPages = document.createElement("h4");
-    newPages.innerText = book.numOfPages;
+    newPages.innerText = `Pages: ${book.numOfPages}`;
+
+    let isReadLabel = document.createElement("label");
+    isReadLabel.classList.add("is-read-label")
+    isReadLabel.htmlFor = "added-read";
+    isReadLabel.innerText = "Read";
     let newIsRead = document.createElement("input");
+    newIsRead.id = "added-read";
+    newIsRead.classList.add("is-read");
     newIsRead.type = "checkbox";
-    newIsRead.name = "addedRead"
+    newIsRead.name = "addedRead";
     newIsRead.checked = book.read;
-    
+    let checkDiv = document.createElement("div");
+    checkDiv.classList.add("check-div");
+    checkDiv.appendChild(isReadLabel);
+    checkDiv.appendChild(newIsRead);
 
     newCard.appendChild(newTitle);
     newCard.appendChild(newAuthor);
     newCard.appendChild(newPages);
-    newCard.appendChild(newIsRead);
-    
+    newCard.appendChild(checkDiv);
+
     cardContainer.appendChild(newCard);
   });
 }
