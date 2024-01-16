@@ -46,12 +46,6 @@ function Book(title, author, numOfPages, read) {
     (this.read = read);
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.numOfPages}, ${
-    this.read ? "already read" : "not read yet"
-  }`;
-};
-
 function fieldsReset(bookTitle, bookAuthor, numOfPages, isRead) {
   bookTitle.value = "";
   bookAuthor.value = "";
