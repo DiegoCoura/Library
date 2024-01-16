@@ -84,6 +84,7 @@ function displayCards(myLibrary) {
     isReadLabel.classList.add("is-read-label")
     isReadLabel.htmlFor = `added-read ${index}`;
     isReadLabel.innerText = "Read";
+
     let newIsRead = document.createElement("input");
     newIsRead.id = `added-read ${index}`;
     newIsRead.classList.add("is-read");
@@ -92,6 +93,7 @@ function displayCards(myLibrary) {
     newIsRead.checked = book.read;
     newIsRead.setAttribute("data-book-index", `${index}`)
     newIsRead.addEventListener( 'change', () => changeBookState(newIsRead.dataset.bookIndex))
+    
     let checkDiv = document.createElement("div");
     checkDiv.classList.add("check-div");
     checkDiv.appendChild(isReadLabel);

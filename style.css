@@ -64,14 +64,18 @@ body {
   border-radius: 10px;
   padding: 10px;
   font-size: inherit;
-  outline: none;
-  transition: 0.2s ease-in-out;
+  outline: none;  
 }
 
 .form-infos input:not([type="checkbox"]):focus,
-.form-button button:hover {
+.form-button:hover, .cancel-btn:hover {
   transform: scale(1.05);
   box-shadow: 3px 4px 6px 0px #919191;
+}
+
+.form-infos input:not([type="checkbox"]),
+.form-button, .cancel-btn{
+  transition: 0.2s ease-in-out;
 }
 
 .is-read-label {
@@ -93,7 +97,7 @@ body {
   gap: 5px;
 }
 
-.form-button button {
+.form-button {
   border-radius: 10px;
   padding: 16px 60px;
   cursor: pointer;
@@ -102,7 +106,20 @@ body {
   background-color: #7d2ae8;
   color: #fff;
   font-weight: bold;
-  transition: 0.2s ease-in-out;
+}
+
+.cancel-btn-container{
+  text-align: justify;
+}
+
+.cancel-btn{
+  background-color: #7d2ae8;
+  cursor: pointer;
+  border-radius: 15px;
+  padding: 6px 17px;
+  font-size: 30px;
+  font-weight: bolder;
+  color: #fff;
 }
 
 .hero {
