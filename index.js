@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 const addForm = document.getElementById("add-form");
 
@@ -59,11 +59,18 @@ function removeAllChildNodes(parent){
   }
 }
 
+function changeBookState(bookIndex){
+  let currentBook = myLibrary[bookIndex]
+  currentBook.read = !myLibrary[bookIndex].read;
+  myLibrary[bookIndex] = currentBook;
+}
+
 function displayCards(myLibrary) {
   let cardContainer = document.querySelector(".hero");
   removeAllChildNodes(cardContainer);
 
-  myLibrary.forEach((book) => {
+  myLibrary.forEach((book, index) => {
+
     let newCard = document.createElement("div");
     newCard.classList.add("card");
     let newTitle = document.createElement("h3");
@@ -75,14 +82,16 @@ function displayCards(myLibrary) {
 
     let isReadLabel = document.createElement("label");
     isReadLabel.classList.add("is-read-label")
-    isReadLabel.htmlFor = "added-read";
+    isReadLabel.htmlFor = `added-read ${index}`;
     isReadLabel.innerText = "Read";
     let newIsRead = document.createElement("input");
-    newIsRead.id = "added-read";
+    newIsRead.id = `added-read ${index}`;
     newIsRead.classList.add("is-read");
     newIsRead.type = "checkbox";
     newIsRead.name = "addedRead";
     newIsRead.checked = book.read;
+    newIsRead.setAttribute("data-book-index", `${index}`)
+    newIsRead.addEventListener( 'change', () => changeBookState(newIsRead.dataset.bookIndex))
     let checkDiv = document.createElement("div");
     checkDiv.classList.add("check-div");
     checkDiv.appendChild(isReadLabel);
