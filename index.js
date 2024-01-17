@@ -53,16 +53,24 @@ function fieldsReset(bookTitle, bookAuthor, numOfPages, isRead) {
   isRead.checked = false;
 }
 
-function removeAllChildNodes(parent){
-  while(parent.firstChild){
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
 }
 
-function changeBookState(bookIndex){
-  let currentBook = myLibrary[bookIndex]
+function changeBookState(bookIndex) {
+  let currentBook = myLibrary[bookIndex];
   currentBook.read = !myLibrary[bookIndex].read;
   myLibrary[bookIndex] = currentBook;
+}
+
+function deleteBook(deleteIndex) {
+  let currentLibrary = myLibrary.filter((book, index) => index != deleteIndex);
+  
+  myLibrary = currentLibrary;
+
+  displayCards(myLibrary);
 }
 
 function displayCards(myLibrary) {
@@ -70,7 +78,6 @@ function displayCards(myLibrary) {
   removeAllChildNodes(cardContainer);
 
   myLibrary.forEach((book, index) => {
-
     let newCard = document.createElement("div");
     newCard.classList.add("card");
     let newTitle = document.createElement("h3");
@@ -81,7 +88,7 @@ function displayCards(myLibrary) {
     newPages.innerText = `Pages: ${book.numOfPages}`;
 
     let isReadLabel = document.createElement("label");
-    isReadLabel.classList.add("is-read-label")
+    isReadLabel.classList.add("is-read-label");
     isReadLabel.htmlFor = `added-read ${index}`;
     isReadLabel.innerText = "Read";
 
@@ -91,9 +98,19 @@ function displayCards(myLibrary) {
     newIsRead.type = "checkbox";
     newIsRead.name = "addedRead";
     newIsRead.checked = book.read;
-    newIsRead.setAttribute("data-book-index", `${index}`)
-    newIsRead.addEventListener( 'change', () => changeBookState(newIsRead.dataset.bookIndex))
-    
+    newIsRead.setAttribute("data-book-index", `${index}`);
+    newIsRead.addEventListener("change", () =>
+      changeBookState(newIsRead.dataset.bookIndex)
+    );
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.id = `delete-btn ${index}`;
+    deleteBtn.innerText = "Delete";
+    deleteBtn.setAttribute("data-delete-index", `${index}`);
+    deleteBtn.addEventListener("click", () =>
+      deleteBook(deleteBtn.dataset.deleteIndex)
+    );
+
     let checkDiv = document.createElement("div");
     checkDiv.classList.add("check-div");
     checkDiv.appendChild(isReadLabel);
@@ -103,6 +120,7 @@ function displayCards(myLibrary) {
     newCard.appendChild(newAuthor);
     newCard.appendChild(newPages);
     newCard.appendChild(checkDiv);
+    newCard.appendChild(deleteBtn);
 
     cardContainer.appendChild(newCard);
   });
