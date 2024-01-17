@@ -82,6 +82,10 @@ function deleteBook(deleteIndex) {
 function createCard(book, index) {
   let newCard = document.createElement("div");
   newCard.classList.add("card");
+
+  let cardInfos = document.createElement("div");
+  cardInfos.classList.add("card-infos");
+
   let newTitle = document.createElement("h3");
   newTitle.innerText = `Title: "${book.title}"`;
   let newAuthor = document.createElement("h4");
@@ -107,8 +111,8 @@ function createCard(book, index) {
 
   let deleteBtn = document.createElement("button");
   deleteBtn.id = `delete-btn ${index}`;
-  deleteBtn.classList.add("form-button");
-  deleteBtn.innerText = "Delete";
+  deleteBtn.classList.add("delete-btn");
+  deleteBtn.innerHTML = `<img src="public/trashcan.png" class="trash-img"></img>`;
   deleteBtn.setAttribute("data-delete-index", `${index}`);
   deleteBtn.addEventListener("click", () =>
     deleteBook(deleteBtn.dataset.deleteIndex)
@@ -118,7 +122,8 @@ function createCard(book, index) {
   checkDiv.classList.add("check-div");
 
   checkDiv.append(isReadLabel, newIsRead);
-  newCard.append(newTitle, newAuthor, newPages, checkDiv, deleteBtn);
+  cardInfos.append(newTitle, newAuthor, newPages)
+  newCard.append(deleteBtn, cardInfos, checkDiv);
 
   return newCard;
 }
