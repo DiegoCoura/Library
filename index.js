@@ -105,6 +105,7 @@ function displayCards(myLibrary) {
 
     let deleteBtn = document.createElement("button");
     deleteBtn.id = `delete-btn ${index}`;
+    deleteBtn.classList.add("form-button")
     deleteBtn.innerText = "Delete";
     deleteBtn.setAttribute("data-delete-index", `${index}`);
     deleteBtn.addEventListener("click", () =>
