@@ -4,9 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Library</title>
+    <title>My Library</title>
   </head>
   <body>
+    <nav class="header-nav">
+      <h1>My Library</h1>
+      <button class="open-dialog-btn">
+        <img class="add-book-icon" src="public/add-file.png" alt="add file icon" />
+        Add book
+      </button>
+    </nav>
     <dialog class="add-book-dialog">
       <form id="add-form" method="dialog">
         <div class="cancel-btn-container">
@@ -16,7 +23,12 @@
         <div class="form-infos">
           <input type="text" class="title" placeholder="Title" name="title" />
 
-          <input type="text" class="author" placeholder="Author" name="author" />
+          <input
+            type="text"
+            class="author"
+            placeholder="Author"
+            name="author"
+          />
 
           <input
             type="number"
@@ -26,8 +38,16 @@
           />
 
           <div class="read-div">
-            <label for="is-read-input" class="is-read-label">Did you read it?</label>
-            <input type="checkbox" id="is-read-input" class="is-read" name="is-read" value="false" />
+            <label for="is-read-input" class="is-read-label"
+              >Did you read it?</label
+            >
+            <input
+              type="checkbox"
+              id="is-read-input"
+              class="is-read"
+              name="is-read"
+              value="false"
+            />
           </div>
         </div>
         <div class="form-button-container">
@@ -35,12 +55,8 @@
         </div>
       </form>
     </dialog>
-    <nav class="header-nav">
-      <h1>Library</h1>
-      <button class="open-dialog-btn">Add book</button>
-    </nav>
-    <main class="hero">
-    </main>
+
+    <main class="hero"></main>
     <footer class="footer"></footer>
     <script src="index.js"></script>
   </body>
