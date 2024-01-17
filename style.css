@@ -37,6 +37,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  box-shadow: 10px 9px 9px 0px #919191;
 }
 
 #add-form {
@@ -140,6 +141,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   justify-content: space-evenly;
+  box-shadow: 5px 5px 6px 0px #919191;
 }
 
 .footer {
