@@ -14,7 +14,7 @@ addForm.addEventListener("submit", (e) => {
   let numOfPages = document.querySelector(".num-of-pages");
   let isRead = document.querySelector(".is-read");
 
-  if (bookTitle.value === "") {
+  if (bookTitle.value.trim() === "") {
     return;
   } else {
     let newBook = new Book(
@@ -23,13 +23,18 @@ addForm.addEventListener("submit", (e) => {
       numOfPages.value,
       isRead.checked
     );
-    myLibrary.push(newBook);
-    fieldsReset(bookTitle, bookAuthor, numOfPages, isRead);
+    addToLibrary(newBook);
+    const fields = { bookTitle, bookTitle, bookAuthor, numOfPages, isRead }
+    fieldsReset(fields);
   }
   addForm.submit();
-  console.log(myLibrary);
   displayCards(myLibrary);
+  console.log(myLibrary);
 });
+
+function addToLibrary(book) {
+  myLibrary.push(book);
+}
 
 openDialogBtn.addEventListener("click", () => {
   dialog.showModal();
@@ -40,13 +45,15 @@ cancelBtn.addEventListener("click", () => {
 });
 
 function Book(title, author, numOfPages, read) {
-  (this.title = title),
+    (this.title = title),
     (this.author = author),
     (this.numOfPages = numOfPages),
     (this.read = read);
 }
 
-function fieldsReset(bookTitle, bookAuthor, numOfPages, isRead) {
+function fieldsReset(fields) {
+  const { bookTitle, bookAuthor, numOfPages, isRead } = fields;
+
   bookTitle.value = "";
   bookAuthor.value = "";
   numOfPages.value = "";
@@ -109,8 +116,8 @@ function createCard(book, index) {
 
   let checkDiv = document.createElement("div");
   checkDiv.classList.add("check-div");
-  checkDiv.append(isReadLabel, newIsRead);
 
+  checkDiv.append(isReadLabel, newIsRead);
   newCard.append(newTitle, newAuthor, newPages, checkDiv, deleteBtn);
 
   return newCard;
