@@ -95,7 +95,6 @@ function deleteBook(deleteIndex) {
   let currentLibrary = myLibrary.filter((_, index) => index != deleteIndex);
 
   Book.totalBooks -= 1;
-  console.log(Book.totalBooks)
   myLibrary = currentLibrary;
   displayCards(myLibrary);
 }
