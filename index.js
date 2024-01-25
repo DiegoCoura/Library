@@ -1,3 +1,21 @@
+class Book {
+  
+  constructor(title, author, numOfPages, read) {
+    (this.title = title),
+    (this.author = author),
+    (this.numOfPages = numOfPages),
+    (this._read = read);
+  }
+
+  get read() {
+    return this._read;
+  }
+
+  set read(newState){
+    this._read = newState
+  }
+}
+
 let myLibrary = [];
 
 const addForm = document.getElementById("add-form");
@@ -24,12 +42,11 @@ addForm.addEventListener("submit", (e) => {
       isRead.checked
     );
     addToLibrary(newBook);
-    const fields = { bookTitle, bookTitle, bookAuthor, numOfPages, isRead }
+    const fields = { bookTitle, bookTitle, bookAuthor, numOfPages, isRead };
     fieldsReset(fields);
   }
   addForm.submit();
   displayCards(myLibrary);
-  console.log(myLibrary);
 });
 
 function addToLibrary(book) {
@@ -43,13 +60,6 @@ openDialogBtn.addEventListener("click", () => {
 cancelBtn.addEventListener("click", () => {
   dialog.close();
 });
-
-function Book(title, author, numOfPages, read) {
-    (this.title = title),
-    (this.author = author),
-    (this.numOfPages = numOfPages),
-    (this.read = read);
-}
 
 function fieldsReset(fields) {
   const { bookTitle, bookAuthor, numOfPages, isRead } = fields;
@@ -67,13 +77,11 @@ function removeAllChildNodes(parent) {
 }
 
 function changeBookState(bookIndex) {
-  let currentBook = myLibrary[bookIndex];
-  currentBook.read = !myLibrary[bookIndex].read;
-  myLibrary[bookIndex] = currentBook;
+  myLibrary[bookIndex].read = !myLibrary[bookIndex].read
 }
 
 function deleteBook(deleteIndex) {
-  let currentLibrary = myLibrary.filter((book, index) => index != deleteIndex);
+  let currentLibrary = myLibrary.filter((_, index) => index != deleteIndex);
 
   myLibrary = currentLibrary;
   displayCards(myLibrary);
@@ -122,7 +130,7 @@ function createCard(book, index) {
   checkDiv.classList.add("check-div");
 
   checkDiv.append(isReadLabel, newIsRead);
-  cardInfos.append(newTitle, newAuthor, newPages)
+  cardInfos.append(newTitle, newAuthor, newPages);
   newCard.append(deleteBtn, cardInfos, checkDiv);
 
   return newCard;
