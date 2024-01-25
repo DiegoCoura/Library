@@ -1,10 +1,21 @@
 class Book {
+
+  static totalBooks = 0;
   
   constructor(title, author, numOfPages, read) {
     (this.title = title),
     (this.author = author),
     (this.numOfPages = numOfPages),
     (this._read = read);
+    Book.totalBooks += 1
+  }
+
+  get totalBooks(){
+    return Book.totalBooks;
+  }
+
+  set totalBooks(x){
+    return Book.totalBooks;
   }
 
   get read() {
@@ -83,6 +94,8 @@ function changeBookState(bookIndex) {
 function deleteBook(deleteIndex) {
   let currentLibrary = myLibrary.filter((_, index) => index != deleteIndex);
 
+  Book.totalBooks -= 1;
+  console.log(Book.totalBooks)
   myLibrary = currentLibrary;
   displayCards(myLibrary);
 }
