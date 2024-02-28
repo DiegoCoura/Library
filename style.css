@@ -31,6 +31,31 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+input:invalid {
+  border-color: #900;
+  background-color: #fdd;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+.error {
+  width: 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius: 0 0 5px 5px;
+
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
+
 .header-nav {
   display: flex;
   background-color: var(--blue);

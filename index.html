@@ -10,32 +10,50 @@
     <nav class="header-nav">
       <h1>My Library</h1>
       <button class="open-dialog-btn">
-        <img class="add-book-icon" src="public/add-file.png" alt="add file icon" />
+        <img
+          class="add-book-icon"
+          src="public/add-file.png"
+          alt="add file icon"
+        />
         Add book
       </button>
     </nav>
     <dialog class="add-book-dialog">
-      <form id="add-form" method="dialog">
+      <form id="add-form" method="dialog" novalidate>
         <div class="cancel-btn-container">
           <button class="cancel-btn" type="reset">X</button>
         </div>
         <h3>Add new book</h3>
         <div class="form-infos">
-          <input type="text" class="title" placeholder="Title" name="title" />
+          <input
+            id="title"
+            type="text"
+            class="title"
+            placeholder="Title"
+            name="title"
+            required
+          />
+          <span id="title-error" class="error" aria-live="polite"></span>
 
           <input
+            id="author"
             type="text"
             class="author"
             placeholder="Author"
             name="author"
+            required
           />
+          <span id="author-error" class="error" aria-live="polite"></span>
 
           <input
+            id="pages"
             type="number"
             class="num-of-pages"
             placeholder="Pages"
             name="num-of-pages"
+            required
           />
+          <span id="pages-error" class="error" aria-live="polite"></span>
 
           <div class="read-div">
             <label for="is-read-input" class="is-read-label"

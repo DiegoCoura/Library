@@ -1,20 +1,19 @@
 class Book {
-
   static totalBooks = 0;
-  
+
   constructor(title, author, numOfPages, read) {
     (this.title = title),
-    (this.author = author),
-    (this.numOfPages = numOfPages),
-    (this._read = read);
-    Book.totalBooks += 1
+      (this.author = author),
+      (this.numOfPages = numOfPages),
+      (this._read = read);
+    Book.totalBooks += 1;
   }
 
-  get totalBooks(){
+  get totalBooks() {
     return Book.totalBooks;
   }
 
-  set totalBooks(x){
+  set totalBooks(x) {
     return Book.totalBooks;
   }
 
@@ -22,8 +21,8 @@ class Book {
     return this._read;
   }
 
-  set read(newState){
-    this._read = newState
+  set read(newState) {
+    this._read = newState;
   }
 }
 
@@ -35,16 +34,45 @@ const openDialogBtn = document.querySelector(".open-dialog-btn");
 const cancelBtn = document.querySelector(".cancel-btn");
 const dialog = document.querySelector(".add-book-dialog");
 
+const bookTitle = document.getElementById("title");
+const bookAuthor = document.querySelector(".author");
+const numOfPages = document.querySelector(".num-of-pages");
+const isRead = document.querySelector(".is-read");
+
+const formElements = [bookTitle, bookAuthor, numOfPages];
+
+formElements.forEach((el) => {
+  const spanError = document.getElementById(`${el.id}-error`);
+  el.addEventListener("change", (e) => {
+    if (el.validity.valid) {
+      spanError.textContent = "";
+      spanError.className = "error";
+      console.log(e.target);
+    } else {
+      console.log(e.target);
+      showError();
+    }
+  });
+});
+
+const showError = (el) => {
+  const spanError = document.getElementById(`${el.id}-error`);
+  if (el.validity.valueMissing) {
+    spanError.textContent = `You need to enter the ${el.id}`;
+  }
+  spanError.className = "error active";
+};
+
 addForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  let bookTitle = document.querySelector(".title");
-  let bookAuthor = document.querySelector(".author");
-  let numOfPages = document.querySelector(".num-of-pages");
-  let isRead = document.querySelector(".is-read");
-
-  if (bookTitle.value.trim() === "") {
-    return;
+  if (!bookTitle.validity.valid) {
+    showError(bookTitle);
+    e.preventDefault();
+  } else if (!bookAuthor.validity.valid) {
+    showError(bookAuthor);
+    e.preventDefault();
+  } else if (!numOfPages.validity.valid) {
+    showError(numOfPages);
+    e.preventDefault();
   } else {
     let newBook = new Book(
       bookTitle.value,
@@ -52,13 +80,20 @@ addForm.addEventListener("submit", (e) => {
       numOfPages.value,
       isRead.checked
     );
+
     addToLibrary(newBook);
     const fields = { bookTitle, bookTitle, bookAuthor, numOfPages, isRead };
+
     fieldsReset(fields);
+
+    addForm.submit();
+    displayCards(myLibrary);
   }
-  addForm.submit();
-  displayCards(myLibrary);
 });
+
+const resetErrorMsg = (el) => {
+  el.setCustomValidity("");
+};
 
 function addToLibrary(book) {
   myLibrary.push(book);
@@ -88,7 +123,7 @@ function removeAllChildNodes(parent) {
 }
 
 function changeBookState(bookIndex) {
-  myLibrary[bookIndex].read = !myLibrary[bookIndex].read
+  myLibrary[bookIndex].read = !myLibrary[bookIndex].read;
 }
 
 function deleteBook(deleteIndex) {
