@@ -55,6 +55,15 @@ formElements.forEach((el) => {
   });
 });
 
+const resetErrorMsgs = () => {
+  const errorMsg = document.querySelector(".error.active");
+  console.log(errorMsg);
+  if (errorMsg) {
+    errorMsg.classList.remove("active");
+    errorMsg.textContent = "";
+  }
+};
+
 const showError = (el) => {
   const spanError = document.getElementById(`${el.id}-error`);
   if (el.validity.valueMissing) {
@@ -91,20 +100,20 @@ addForm.addEventListener("submit", (e) => {
   }
 });
 
-const resetErrorMsg = (el) => {
-  el.setCustomValidity("");
-};
-
 function addToLibrary(book) {
   myLibrary.push(book);
 }
 
 openDialogBtn.addEventListener("click", () => {
   dialog.showModal();
+  resetErrorMsgs();
+  const fields = { bookTitle, bookTitle, bookAuthor, numOfPages, isRead };
+  fieldsReset(fields);
 });
 
 cancelBtn.addEventListener("click", () => {
   dialog.close();
+  
 });
 
 function fieldsReset(fields) {
