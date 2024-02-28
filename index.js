@@ -47,9 +47,7 @@ formElements.forEach((el) => {
     if (el.validity.valid) {
       spanError.textContent = "";
       spanError.className = "error";
-      console.log(e.target);
     } else {
-      console.log(e.target);
       showError();
     }
   });
@@ -57,7 +55,7 @@ formElements.forEach((el) => {
 
 const resetErrorMsgs = () => {
   const errorMsg = document.querySelector(".error.active");
-  console.log(errorMsg);
+
   if (errorMsg) {
     errorMsg.classList.remove("active");
     errorMsg.textContent = "";
@@ -113,7 +111,6 @@ openDialogBtn.addEventListener("click", () => {
 
 cancelBtn.addEventListener("click", () => {
   dialog.close();
-  
 });
 
 function fieldsReset(fields) {
